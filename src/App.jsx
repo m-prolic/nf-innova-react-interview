@@ -1,15 +1,14 @@
-import { useState } from "react";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ReposWrapper from "./components/ReposWrapper";
+import RepoDetails from "./components/RepoDetails";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<></>} />
-        <Route path="/repo/:repoName" element={<></>} />
+        <Route path="/" element={<ReposWrapper></ReposWrapper>} />
+        <Route path="/repo/:repoName" element={<RepoDetails></RepoDetails>} />
       </Routes>
     </BrowserRouter>
   );

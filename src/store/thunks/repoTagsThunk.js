@@ -1,18 +1,18 @@
-import { getRepoDetails } from "../../services/githubService";
+import { getRepoTags } from "../../services/githubService";
 import {
-  fetchRepoDetailsFailure,
-  fetchRepoDetailsRequest,
-  fetchRepoDetailsSuccess,
-} from "../actions/repoDetailsAction";
+  fetchRepoTagsFailure,
+  fetchRepoTagsRequest,
+  fetchRepoTagsSuccess,
+} from "../actions/repoTagsAction";
 
-export const fetchRepoDetailsThunk = (username, repo) => {
+export const fetchRepoTagsThunk = (username, repo) => {
   return async (dispatch) => {
-    dispatch(fetchRepoDetailsRequest());
+    dispatch(fetchRepoTagsRequest());
     try {
-      const repoDetails = await getRepoDetails(username, repo);
-      dispatch(fetchRepoDetailsSuccess(repoDetails));
+      const tags = await getRepoTags(username, repo);
+      dispatch(fetchRepoTagsSuccess(tags));
     } catch (error) {
-      dispatch(fetchRepoDetailsFailure(error.message));
+      dispatch(fetchRepoTagsFailure(error.message));
     }
   };
 };
