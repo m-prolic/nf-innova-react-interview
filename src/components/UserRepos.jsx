@@ -11,7 +11,7 @@ const UserRepos = () => {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    dispatch(fetchReposForUserThunk(defaultRepoName, page, perPage));
+    dispatch(fetchReposForUserThunk(defaultRepoName, page));
   }, [page, dispatch]);
 
   if (loading) return <p>Loading...</p>;

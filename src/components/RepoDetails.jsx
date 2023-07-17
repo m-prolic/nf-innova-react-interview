@@ -77,7 +77,7 @@ const RepoDetails = () => {
       </div>
     </div>
   ) : (
-    <div>Loading...</div>
+    <></>
   );
 };
 

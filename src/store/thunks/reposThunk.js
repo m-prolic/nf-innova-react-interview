@@ -2,6 +2,7 @@ import {
   getReleasesForRepo,
   getUserReposPaginated,
 } from "../../services/githubService";
+import { perPage } from "../../utils/constants";
 import {
   getTotalPages,
   totalPagesValidation,
@@ -13,7 +14,7 @@ import {
 } from "../actions/reposAction";
 import { store } from "../store";
 
-export const fetchReposForUserThunk = (username, page, perPage) => {
+export const fetchReposForUserThunk = (username, page) => {
   return async (dispatch) => {
     dispatch(fetchReposRquest());
     try {
