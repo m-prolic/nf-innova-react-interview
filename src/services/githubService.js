@@ -1,6 +1,8 @@
 import axios from "axios";
 import { githubApiBaseUrl } from "../utils/constants";
 import { notify } from "../utils/notificationHelper";
+import { logError } from "../utils/loggerHelper";
+import { errorMessages } from "../utils/errorMessages";
 
 const githubApi = axios.create({
   baseURL: githubApiBaseUrl,
@@ -11,7 +13,7 @@ githubApi.interceptors.response.use(
     return response;
   },
   function (error) {
-    notify("Something went wrong on getting data from Github API");
+    notify(errorMessages.somethingWentWrong);
     return Promise.reject(error);
   }
 );
@@ -21,7 +23,7 @@ export const getUserRepos = async (username) => {
     const response = await githubApi.get(`/users/${username}/repos`);
     return response.data;
   } catch (error) {
-    console.error("Error fetching user repos:", error);
+    logError(error, errorMessages.userReposFetching);
     throw error;
   }
 };
@@ -33,7 +35,7 @@ export const getUserReposPaginated = async (username, page, perPage) => {
     );
     return response.data;
   } catch (error) {
-    console.error("Error fetching user repos paginated:", error);
+    logError(error, errorMessages.userReposPaginatedFetching);
     throw error;
   }
 };
@@ -43,7 +45,7 @@ export const getRepoDetails = async (username, repo) => {
     const response = await githubApi.get(`/repos/${username}/${repo}`);
     return response.data;
   } catch (error) {
-    console.error("Error fetching repo details:", error);
+    logError(error, errorMessages.repoDetailsFetching);
     throw error;
   }
 };
@@ -53,7 +55,7 @@ export const getRepoTags = async (username, repo) => {
     const response = await githubApi.get(`/repos/${username}/${repo}/tags`);
     return response.data;
   } catch (error) {
-    console.error("Error fetching repo tags:", error);
+    logError(error, errorMessages.repoTagsFetching);
     throw error;
   }
 };
@@ -63,7 +65,7 @@ export const getReleasesForRepo = async (username, repo) => {
     const response = await githubApi.get(`/repos/${username}/${repo}/releases`);
     return response.data;
   } catch (error) {
-    console.error("Error fetching repo releases:", error);
+    logError(error, errorMessages.repoReleasesFetching);
     throw error;
   }
 };
