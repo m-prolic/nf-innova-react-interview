@@ -15,7 +15,14 @@ const ReposWrapper = () => {
   }, [dispatch]);
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (error)
+    return (
+      <p>
+        Are you sure there is{" "}
+        <span style={{ fontWeight: "bold" }}>{defaultRepoName}</span> ? <br />
+        Error: {error}
+      </p>
+    );
 
   return (
     <div>

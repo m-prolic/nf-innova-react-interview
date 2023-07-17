@@ -1,9 +1,20 @@
 import axios from "axios";
 import { githubApiBaseUrl } from "../utils/constants";
+import { notify } from "../utils/notificationHelper";
 
 const githubApi = axios.create({
   baseURL: githubApiBaseUrl,
 });
+
+githubApi.interceptors.response.use(
+  function (response) {
+    return response;
+  },
+  function (error) {
+    notify("Something went wrong on getting data from Github API");
+    return Promise.reject(error);
+  }
+);
 
 export const getUserRepos = async (username) => {
   try {
